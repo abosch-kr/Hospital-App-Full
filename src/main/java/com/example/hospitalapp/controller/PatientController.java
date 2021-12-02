@@ -20,17 +20,17 @@ public class PatientController
     }
 
     @GetMapping("/{id}")
-    public Patient getDoctor(@PathVariable String id) {
+    public Patient getPatient(@PathVariable String id) {
         return repository.findById(id).orElse(null);
     }
 
     @PostMapping("/")
-    public Patient postDoctor(@RequestBody Patient patient) {
+    public Patient postPatient(@RequestBody Patient patient) {
         return repository.save(patient);
     }
 
     @PutMapping("/")
-    public Patient putDoctor(@RequestBody Patient updatedPatient) {
+    public Patient updatePatient(@RequestBody Patient updatedPatient) {
         Patient patient = repository.findById(updatedPatient.getId()).orElse(null);
         assert patient != null;
         patient.setDoctor(updatedPatient.getDoctor());
@@ -44,7 +44,7 @@ public class PatientController
     }
 
     @DeleteMapping("/{id}")
-    public String deleteDoctor(@PathVariable String id) {
+    public String deletePatient(@PathVariable String id) {
         repository.deleteById(id);
         return id;
     }

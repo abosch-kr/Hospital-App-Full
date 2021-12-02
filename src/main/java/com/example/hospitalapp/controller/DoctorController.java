@@ -32,7 +32,7 @@ public class DoctorController extends BaseController {
     }
 
     @PutMapping("/")
-    public Doctor putDoctor(@RequestBody Doctor updatedDoctor) {
+    public Doctor updateDoctor(@RequestBody Doctor updatedDoctor) {
         Doctor doctor = repository.findById(updatedDoctor.getId()).orElse(null);
         assert doctor != null;
         doctor.setName(updatedDoctor.getName());

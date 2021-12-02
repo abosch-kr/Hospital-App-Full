@@ -1,9 +1,13 @@
 package com.example.hospitalapp.model;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.List;
 
 public class Patient
 {
+    @Id
+    private String id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -11,6 +15,10 @@ public class Patient
     private List<String> ailments;
     private int priority;
     private Doctor doctor;
+
+    public Patient()
+    {
+    }
 
     public Patient(String firstName, String middleName, String lastName, String suffix,
             List<String> ailments, int priority, Doctor doctor)
@@ -22,6 +30,11 @@ public class Patient
         this.ailments = ailments;
         this.priority = priority;
         this.doctor = doctor;
+    }
+
+    public String getId()
+    {
+        return id;
     }
 
     public String getFirstName()

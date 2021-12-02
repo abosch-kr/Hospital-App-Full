@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/doctor/api")
+@RequestMapping("/api/doctor")
 public class DoctorController extends BaseController {
     @Autowired
     private DoctorRepository repository;
@@ -46,7 +46,7 @@ public class DoctorController extends BaseController {
     }
 
     private final View   view;
-    private       Doctor doctor;
+    private final Doctor doctor;
 
 
 

@@ -14,9 +14,7 @@ public class Doctor
         this.name = name;
     }
 
-    public Doctor()
-    {
-    }
+    public Doctor() { }
 
     public String getName()
     {

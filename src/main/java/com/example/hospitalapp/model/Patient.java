@@ -4,10 +4,11 @@ import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
-public class Patient
+public class Patient implements HospitalEntity
 {
     @Id
     private String id;
+
     private String firstName;
     private String middleName;
     private String lastName;

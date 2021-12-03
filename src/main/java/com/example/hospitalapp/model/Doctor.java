@@ -2,7 +2,7 @@ package com.example.hospitalapp.model;
 
 import org.springframework.data.annotation.Id;
 
-public class Doctor
+public class Doctor implements HospitalEntity
 {
     @Id
     private String id;

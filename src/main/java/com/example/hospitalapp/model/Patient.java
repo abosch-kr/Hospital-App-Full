@@ -38,6 +38,12 @@ public class Patient implements HospitalEntity
         return id;
     }
 
+    @Override
+    public String getName()
+    {
+        return null;
+    }
+
     public String getFirstName()
     {
         return firstName;

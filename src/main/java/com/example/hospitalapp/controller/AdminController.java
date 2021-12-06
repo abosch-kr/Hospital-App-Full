@@ -1,25 +1,50 @@
 package com.example.hospitalapp.controller;
 
 import com.example.hospitalapp.model.HospitalEntity;
-import org.springframework.web.bind.annotation.*;
+import com.example.hospitalapp.repository.HospitalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@RestController
-public interface AdminController
+public class AdminController implements HospitalController
 {
-    @GetMapping("/")
-    List<HospitalEntity> get();
+    @Autowired
+    private HospitalRepository repository;
 
-    @GetMapping("/{id}")
-    HospitalEntity get(@PathVariable String id);
+    @Override
+    public List<HospitalEntity> get()
+    {
+        return repository.findAll();
+    }
 
-    @PostMapping("/")
-    HospitalEntity post(@RequestBody HospitalEntity entity);
+    @Override
+    public HospitalEntity get(String id)
+    {
+        return repository.findById(id).orElse(null);
+    }
 
-    @PutMapping("/")
-    HospitalEntity update(@RequestBody HospitalEntity updatedEntity);
+    @Override
+    public HospitalEntity post(HospitalEntity entity)
+    {
+        return repository.save(entity);
+    }
 
-    @DeleteMapping("/{id}")
-    String delete(@PathVariable String id);
+    @Override
+    public HospitalEntity update(HospitalEntity updatedEntity) {
+        HospitalEntity entity = repository.findById(updatedEntity.getId()).orElse(null);
+        assert entity != null;
+        entity = updatedEntity;
+        return entity;
+    }
+
+
+    @Override
+    public String delete(String id)
+    {
+        repository.deleteById(id);
+        return id;
+    }
 }

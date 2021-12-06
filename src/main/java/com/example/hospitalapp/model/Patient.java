@@ -16,6 +16,7 @@ public class Patient implements HospitalEntity
     private List<String> ailments;
     private int priority;
     private Doctor doctor;
+    private boolean treated;
 
     public Patient()
     {
@@ -31,6 +32,7 @@ public class Patient implements HospitalEntity
         this.ailments = ailments;
         this.priority = priority;
         this.doctor = doctor;
+        this.treated = false;
     }
 
     public String getId()
@@ -112,5 +114,15 @@ public class Patient implements HospitalEntity
     public void setDoctor(Doctor doctor)
     {
         this.doctor = doctor;
+    }
+
+    public boolean isTreated()
+    {
+        return treated;
+    }
+
+    public void setTreated(boolean treated)
+    {
+        this.treated = treated;
     }
 }

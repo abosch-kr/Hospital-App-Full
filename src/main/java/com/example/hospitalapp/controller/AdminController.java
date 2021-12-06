@@ -3,9 +3,6 @@ package com.example.hospitalapp.controller;
 import com.example.hospitalapp.model.HospitalEntity;
 import com.example.hospitalapp.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

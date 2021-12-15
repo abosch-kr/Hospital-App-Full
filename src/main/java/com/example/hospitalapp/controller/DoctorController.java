@@ -16,22 +16,22 @@ public class DoctorController {
     private DoctorRepository repository;
 
     @GetMapping("/")
-    public List<Doctor> get() {
+    public List<Doctor> getDoctors() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Doctor get(@PathVariable Long id) {
+    public Doctor getDoctor(@PathVariable String id) {
         return repository.findById(id).orElse(null);
     }
 
     @PostMapping("/")
-    public Doctor post(@RequestBody Doctor doctor) {
+    public Doctor postDoctor(@RequestBody Doctor doctor) {
         return repository.save(doctor);
     }
 
     @PutMapping("/")
-    public Doctor update(@RequestBody Doctor updatedDoctor) {
+    public Doctor updateDoctor(@RequestBody Doctor updatedDoctor) {
         Doctor doctor = repository.findById(updatedDoctor.getId()).orElse(null);
         assert doctor != null;
         doctor.setName(updatedDoctor.getName());
@@ -39,7 +39,7 @@ public class DoctorController {
     }
 
     @DeleteMapping("/{id}")
-    public Long delete(@PathVariable Long id) {
+    public String deleteDoctor(@PathVariable String id) {
         repository.deleteById(id);
         return id;
     }

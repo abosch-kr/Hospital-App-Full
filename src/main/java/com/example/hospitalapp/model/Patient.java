@@ -10,7 +10,7 @@ import java.util.List;
 public class Patient implements HospitalEntity
 {
     @Id
-    private Long id;
+    private String id;
 
     private String firstName;
     private String middleName;
@@ -39,7 +39,7 @@ public class Patient implements HospitalEntity
     }
 
     @Id
-    public Long getId()
+    public String getId()
     {
         return id;
     }
@@ -125,11 +125,5 @@ public class Patient implements HospitalEntity
     public void setTreated(boolean treated)
     {
         this.treated = treated;
-    }
-
-    @Override
-    public MongoRepository getRepository()
-    {
-        return repository;
     }
 }

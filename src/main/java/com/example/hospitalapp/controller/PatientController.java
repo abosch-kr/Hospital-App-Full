@@ -20,7 +20,7 @@ public class PatientController
     }
 
     @GetMapping("/{id}")
-    public Patient getPatient(@PathVariable String id) {
+    public Patient getPatient(@PathVariable Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -44,7 +44,7 @@ public class PatientController
     }
 
     @DeleteMapping("/{id}")
-    public String deletePatient(@PathVariable String id) {
+    public Long deletePatient(@PathVariable Long id) {
         repository.deleteById(id);
         return id;
     }

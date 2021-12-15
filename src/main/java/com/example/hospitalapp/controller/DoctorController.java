@@ -3,8 +3,6 @@ package com.example.hospitalapp.controller;
 
 import com.example.hospitalapp.model.Doctor;
 import com.example.hospitalapp.repository.DoctorRepository;
-import com.example.hospitalapp.view.CLIView;
-import com.example.hospitalapp.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,27 +10,28 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/doctor")
-public class DoctorController extends BaseController {
+public class DoctorController {
+
     @Autowired
     private DoctorRepository repository;
 
     @GetMapping("/")
-    public List<Doctor> getDoctors() {
+    public List<Doctor> get() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Doctor getDoctor(@PathVariable String id) {
+    public Doctor get(@PathVariable Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @PostMapping("/")
-    public Doctor postDoctor(@RequestBody Doctor doctor) {
+    public Doctor post(@RequestBody Doctor doctor) {
         return repository.save(doctor);
     }
 
     @PutMapping("/")
-    public Doctor updateDoctor(@RequestBody Doctor updatedDoctor) {
+    public Doctor update(@RequestBody Doctor updatedDoctor) {
         Doctor doctor = repository.findById(updatedDoctor.getId()).orElse(null);
         assert doctor != null;
         doctor.setName(updatedDoctor.getName());
@@ -40,34 +39,8 @@ public class DoctorController extends BaseController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteDoctor(@PathVariable String id) {
+    public Long delete(@PathVariable Long id) {
         repository.deleteById(id);
         return id;
-    }
-
-    private final View   view;
-    private final Doctor doctor;
-
-
-
-    public DoctorController()
-    {
-        this.view = new CLIView();
-        this.doctor = new Doctor("Tom");
-    }
-
-    public DoctorController(View view, Doctor doctor) {
-        this.view = view;
-        this.doctor = doctor;
-    }
-
-    @Override
-    void simulateOperation() {
-        System.out.println("Simulating Doctor operation...");
-    }
-
-    @Override
-    void getDescription() {
-        view.outputNewLine(doctor.getClass().getName());
     }
 }

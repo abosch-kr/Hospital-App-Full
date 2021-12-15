@@ -1,13 +1,16 @@
 package com.example.hospitalapp.model;
 
+import com.example.hospitalapp.repository.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
 public class Patient implements HospitalEntity
 {
     @Id
-    private String id;
+    private Long id;
 
     private String firstName;
     private String middleName;
@@ -35,16 +38,14 @@ public class Patient implements HospitalEntity
         this.treated = false;
     }
 
-    public String getId()
+    @Id
+    public Long getId()
     {
         return id;
     }
 
-    @Override
-    public String getName()
-    {
-        return null;
-    }
+    @Autowired
+    private PatientRepository repository;
 
     public String getFirstName()
     {
@@ -124,5 +125,11 @@ public class Patient implements HospitalEntity
     public void setTreated(boolean treated)
     {
         this.treated = treated;
+    }
+
+    @Override
+    public MongoRepository getRepository()
+    {
+        return repository;
     }
 }

@@ -15,8 +15,8 @@ public enum Roles {
         @Override
         void simulate()
         {
-            BaseController doctorController = new DoctorController();
-            doctorController.simulateOperation();
+//            BaseController doctorController = new DoctorController();
+//            doctorController.simulateOperation();
         }
     }, NURSE(2) {
         @Override

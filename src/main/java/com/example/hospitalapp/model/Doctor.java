@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 public class Doctor implements HospitalEntity
 {
     @Id
-    private Long id;
+    private String id;
 
     @Autowired
     private DoctorRepository repository;
@@ -31,14 +31,8 @@ public class Doctor implements HospitalEntity
         this.name = name;
     }
 
-    public Long getId()
+    public String getId()
     {
         return id;
-    }
-
-    @Override
-    public DoctorRepository getRepository()
-    {
-        return repository;
     }
 }

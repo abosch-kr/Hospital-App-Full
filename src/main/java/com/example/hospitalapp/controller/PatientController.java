@@ -1,5 +1,6 @@
 package com.example.hospitalapp.controller;
 
+import com.example.hospitalapp.model.Doctor;
 import com.example.hospitalapp.model.Patient;
 import com.example.hospitalapp.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class PatientController
     }
 
     @GetMapping("/{id}")
-    public Patient getPatient(@PathVariable Long id) {
+    public Patient getPatient(@PathVariable String id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -40,12 +41,32 @@ public class PatientController
         patient.setSuffix(updatedPatient.getSuffix());
         patient.setMiddleName(updatedPatient.getMiddleName());
         patient.setPriority(updatedPatient.getPriority());
+        repository.save(patient);
         return patient;
     }
 
     @DeleteMapping("/{id}")
-    public Long deletePatient(@PathVariable Long id) {
+    public String deletePatient(@PathVariable String id) {
         repository.deleteById(id);
         return id;
     }
+
+    @PutMapping("/treat/{id}")
+    public Patient treatPatient(@PathVariable String id) {
+        Patient patient = repository.findById(id).orElse(null);
+        assert patient != null;
+        patient.setTreated(true);
+        repository.save(patient);
+        return patient;
+    }
+
+    @GetMapping("/doctor/{doctorId}")
+    public Patient getPatientsByDoctor(@PathVariable String doctorId) {
+        return repository.findPatientByDoctor(doctorId);
+    }
+
+//    @PutMapping("/{id}/doctor/assign/{doctorId}")
+//    public Patient assignDoctor(@PathVariable String id, @PathVariable String doctorId) {
+//
+//    }
 }

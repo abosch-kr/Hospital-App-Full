@@ -4,14 +4,18 @@ import com.example.hospitalapp.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
-public class Patient implements HospitalEntity
+@Component
+public class Patient implements DataEntity
 {
-    @Id
-    private Long id;
+    @Autowired
+    private PatientRepository repository;
 
+    @Id private Long id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -43,9 +47,6 @@ public class Patient implements HospitalEntity
     {
         return id;
     }
-
-    @Autowired
-    private PatientRepository repository;
 
     public String getFirstName()
     {
@@ -128,7 +129,38 @@ public class Patient implements HospitalEntity
     }
 
     @Override
-    public MongoRepository getRepository()
+    public Patient create(DataEntity patient)
+    {
+        return repository.save((Patient) patient);
+    }
+
+    @Override
+    public Patient update(String id)
+    {
+        return null;
+    }
+
+    @Override
+    public List<Patient> readAll()
+    {
+        return repository.findAll();
+    }
+
+    @Override
+    public Optional<Patient> read(String id)
+    {
+        return repository.findById(id);
+    }
+
+    @Override
+    public String delete(String id)
+    {
+        repository.deleteById(id);
+        return id;
+    }
+
+    @Override
+    public MongoRepository<? extends DataEntity, String> getRepository()
     {
         return repository;
     }

@@ -41,14 +41,19 @@ public class PatientController
         patient.setSuffix(updatedPatient.getSuffix());
         patient.setMiddleName(updatedPatient.getMiddleName());
         patient.setPriority(updatedPatient.getPriority());
-        repository.save(patient);
-        return patient;
+
+        return repository.save(patient);
     }
 
     @DeleteMapping("/{id}")
     public String deletePatient(@PathVariable String id) {
         repository.deleteById(id);
         return id;
+    }
+
+    @DeleteMapping("/")
+    public void deletePatients() {
+        repository.deleteAll();
     }
 
     @PutMapping("/treat/{id}")

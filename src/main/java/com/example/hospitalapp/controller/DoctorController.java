@@ -43,4 +43,9 @@ public class DoctorController {
         repository.deleteById(id);
         return id;
     }
+
+    @DeleteMapping("/")
+    public void deleteDoctors() {
+        repository.deleteAll();
+    }
 }

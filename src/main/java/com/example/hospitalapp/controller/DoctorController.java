@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctor")
+@RequestMapping("/api/doctors")
 public class DoctorController {
 
     @Autowired
@@ -34,8 +34,11 @@ public class DoctorController {
     public Doctor updateDoctor(@RequestBody Doctor updatedDoctor) {
         Doctor doctor = repository.findById(updatedDoctor.getId()).orElse(null);
         assert doctor != null;
-        doctor.setName(updatedDoctor.getName());
-        return doctor;
+        doctor.setFirstName(updatedDoctor.getFirstName());
+        doctor.setLastName(updatedDoctor.getLastName());
+        doctor.setSpecialty(updatedDoctor.getSpecialty());
+
+        return repository.save(doctor);
     }
 
     @DeleteMapping("/{id}")
@@ -47,5 +50,10 @@ public class DoctorController {
     @DeleteMapping("/")
     public void deleteDoctors() {
         repository.deleteAll();
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Doctor> getDoctorsBySpecialty(@RequestParam(value="specialty") String specialty) {
+        return repository.findAllBySpecialty(specialty);
     }
 }

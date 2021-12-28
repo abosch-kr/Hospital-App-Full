@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 
 public interface PatientRepository extends MongoRepository<Patient, String> {
-    Patient findPatientByDoctor(String doctorId);
+    Patient findPatientByDoctorId(String doctor_id);
 }

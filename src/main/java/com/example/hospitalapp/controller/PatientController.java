@@ -30,9 +30,9 @@ public class PatientController
         return repository.save(patient);
     }
 
-    @PutMapping("/")
-    public Patient updatePatient(@RequestBody Patient updatedPatient) {
-        Patient patient = repository.findById(updatedPatient.getId()).orElse(null);
+    @PutMapping("/{id}")
+    public Patient updatePatient(@PathVariable String id, @RequestBody Patient updatedPatient) {
+        Patient patient = repository.findById(id).orElse(null);
         assert patient != null;
         patient.setDoctor(updatedPatient.getDoctor());
         patient.setAilments(updatedPatient.getAilments());

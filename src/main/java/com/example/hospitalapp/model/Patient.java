@@ -4,9 +4,11 @@ import com.example.hospitalapp.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class Patient implements HospitalEntity
 {
     @Id
@@ -43,9 +45,6 @@ public class Patient implements HospitalEntity
     {
         return id;
     }
-
-    @Autowired
-    private PatientRepository repository;
 
     public String getFirstName()
     {

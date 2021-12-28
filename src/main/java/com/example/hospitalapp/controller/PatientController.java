@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/patient")
+@RequestMapping("/api/patients")
 public class PatientController
 {
     @Autowired
@@ -67,7 +67,7 @@ public class PatientController
 
     @GetMapping("/doctor/{doctorId}")
     public Patient getPatientsByDoctor(@PathVariable String doctorId) {
-        return repository.findPatientByDoctor(doctorId);
+        return repository.findPatientByDoctorId(doctorId);
     }
 
 //    @PutMapping("/{id}/doctor/assign/{doctorId}")

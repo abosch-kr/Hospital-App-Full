@@ -30,9 +30,9 @@ public class DoctorController {
         return repository.save(doctor);
     }
 
-    @PutMapping("/")
-    public Doctor updateDoctor(@RequestBody Doctor updatedDoctor) {
-        Doctor doctor = repository.findById(updatedDoctor.getId()).orElse(null);
+    @PutMapping("/{id}")
+    public Doctor updateDoctor(@PathVariable String id, @RequestBody Doctor updatedDoctor) {
+        Doctor doctor = repository.findById(id).orElse(null);
         assert doctor != null;
         doctor.setFirstName(updatedDoctor.getFirstName());
         doctor.setLastName(updatedDoctor.getLastName());

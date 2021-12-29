@@ -2,9 +2,6 @@ package com.example.hospitalapp.controller;
 
 import com.example.hospitalapp.util.Models;
 import com.example.hospitalapp.model.DataEntity;
-import com.example.hospitalapp.util.Repositories;
-import org.reflections.Reflections;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;

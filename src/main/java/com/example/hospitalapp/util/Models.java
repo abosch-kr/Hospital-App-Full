@@ -1,7 +1,6 @@
 package com.example.hospitalapp.util;
 
 import com.example.hospitalapp.model.DataEntity;
-import io.swagger.models.Model;
 import org.reflections.Reflections;
 
 import java.util.HashMap;

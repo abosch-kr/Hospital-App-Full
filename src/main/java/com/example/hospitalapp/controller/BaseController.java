@@ -12,8 +12,12 @@ import java.util.*;
 @RestController
 @RequestMapping("/api")
 public class BaseController {
-    private final Map<String, DataEntity> models = Models.getModels();
-    private final Map<String, MongoRepository<? extends DataEntity, String>> repositories = Repositories.getRepositories();
+    private final Map<String, DataEntity> models;
+
+    public BaseController() throws InstantiationException, IllegalAccessException
+    {
+        models = Models.getModels();
+    }
 
     @PostMapping("/{entityType}")
     public DataEntity post(@RequestBody DataEntity entity, @PathVariable String entityType) {

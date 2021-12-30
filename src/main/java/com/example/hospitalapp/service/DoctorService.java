@@ -21,11 +21,13 @@ public class DoctorService implements DataService
     }
 
     @Override
-    public Doctor update(String id)
+    public Doctor update(String id, DataEntity updatedDoctor)
     {
         Doctor doctor = repository.findById(id).orElse(null);
         assert doctor != null;
-        return doctor;
+        doctor.setName(((Doctor)updatedDoctor).getName());
+
+        return repository.save(doctor);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface DataService
 {
     DataEntity create(DataEntity entity);
-    DataEntity update(String id);
+    DataEntity update(String id, DataEntity entity);
     List<? extends DataEntity> readAll();
     Optional<? extends DataEntity> read(String id);
     String delete(String id);

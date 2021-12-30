@@ -22,7 +22,7 @@ public class PatientService implements DataService
     }
 
     @Override
-    public Patient update(String id)
+    public Patient update(String id, DataEntity updatedPatient)
     {
         return null;
     }

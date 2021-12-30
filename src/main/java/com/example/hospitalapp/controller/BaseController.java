@@ -1,7 +1,8 @@
 package com.example.hospitalapp.controller;
 
-import com.example.hospitalapp.util.Models;
 import com.example.hospitalapp.model.DataEntity;
+import com.example.hospitalapp.util.Services;
+import com.example.hospitalapp.service.DataService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -9,35 +10,35 @@ import java.util.*;
 @RestController
 @RequestMapping("/api")
 public class BaseController {
-    private final Map<String, DataEntity> models;
+    private final Map<String, DataService> services;
 
     public BaseController() throws InstantiationException, IllegalAccessException
     {
-        models = Models.getModels();
+        services = Services.getServices();
     }
 
-    @PostMapping("/{entityType}")
-    public DataEntity post(@RequestBody DataEntity entity, @PathVariable String entityType) {
-        return models.get(entityType).create(entity);
+    @PostMapping("/{serviceType}")
+    public DataEntity post(@RequestBody DataEntity entity, @PathVariable String serviceType) {
+        return services.get(serviceType).create(entity);
     }
 
-    @GetMapping("/{entityType}")
-    public List<? extends DataEntity> get(@PathVariable String entityType) {
-        return models.get(entityType).readAll();
+    @GetMapping("/{serviceType}")
+    public List<? extends DataEntity> get(@PathVariable String serviceType) {
+        return services.get(serviceType).readAll();
     }
 
-    @GetMapping("/{entityType}/{id}")
-    public Optional<? extends DataEntity> get(@PathVariable String entityType, @PathVariable String id) {
-        return models.get(entityType).getRepository().findById(id);
+    @GetMapping("/{serviceType}/{id}")
+    public Optional<? extends DataEntity> get(@PathVariable String serviceType, @PathVariable String id) {
+        return services.get(serviceType).read(id);
     }
 
-    @PutMapping("/{entityType}/{id}")
-    public DataEntity update(@PathVariable String entityType, @PathVariable String id) {
-        return models.get(entityType).update(id);
+    @PutMapping("/{serviceType}/{id}")
+    public DataEntity update(@PathVariable String serviceType, @PathVariable String id) {
+        return services.get(serviceType).update(id);
     }
 
-    @DeleteMapping("/{entityType}/{id}")
-    public String delete(@PathVariable String entityType, @PathVariable String id) {
-        return models.get(entityType).delete(id);
+    @DeleteMapping("/{serviceType}/{id}")
+    public String delete(@PathVariable String serviceType, @PathVariable String id) {
+        return services.get(serviceType).delete(id);
     }
 }

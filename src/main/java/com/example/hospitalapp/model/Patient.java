@@ -15,7 +15,7 @@ public class Patient implements DataEntity
     @Autowired
     private PatientRepository repository;
 
-    @Id private Long id;
+    @Id private String id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -43,7 +43,7 @@ public class Patient implements DataEntity
     }
 
     @Id
-    public Long getId()
+    public String getId()
     {
         return id;
     }
@@ -126,42 +126,5 @@ public class Patient implements DataEntity
     public void setTreated(boolean treated)
     {
         this.treated = treated;
-    }
-
-    @Override
-    public Patient create(DataEntity patient)
-    {
-        return repository.save((Patient) patient);
-    }
-
-    @Override
-    public Patient update(String id)
-    {
-        return null;
-    }
-
-    @Override
-    public List<Patient> readAll()
-    {
-        return repository.findAll();
-    }
-
-    @Override
-    public Optional<Patient> read(String id)
-    {
-        return repository.findById(id);
-    }
-
-    @Override
-    public String delete(String id)
-    {
-        repository.deleteById(id);
-        return id;
-    }
-
-    @Override
-    public MongoRepository<? extends DataEntity, String> getRepository()
-    {
-        return repository;
     }
 }

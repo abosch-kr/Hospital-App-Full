@@ -24,7 +24,17 @@ public class PatientService implements DataService
     @Override
     public Patient update(String id, DataEntity updatedPatient)
     {
-        return null;
+        Patient patient = repository.findById(id).orElse(null);
+        assert patient != null;
+        patient.setDoctor(((Patient)updatedPatient).getDoctor());
+        patient.setAilments(((Patient)updatedPatient).getAilments());
+        patient.setFirstName(((Patient)updatedPatient).getFirstName());
+        patient.setLastName(((Patient)updatedPatient).getLastName());
+        patient.setSuffix(((Patient)updatedPatient).getSuffix());
+        patient.setMiddleName(((Patient)updatedPatient).getMiddleName());
+        patient.setPriority(((Patient)updatedPatient).getPriority());
+
+        return repository.save(patient);
     }
 
     @Override

@@ -15,13 +15,6 @@ public class BaseController {
     @Autowired
     private Map<String, DataService> services;
 
-    @Autowired
-    private PatientRepository testRepository;
-
-    public BaseController() throws InstantiationException, IllegalAccessException
-    {
-    }
-
     @PostMapping("/{serviceType}")
     public DataEntity post(@RequestBody DataEntity entity, @PathVariable String serviceType) {
         return services.get(serviceType).create(entity);

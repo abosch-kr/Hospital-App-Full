@@ -1,8 +1,10 @@
 package com.example.hospitalapp.controller;
 
 import com.example.hospitalapp.model.DataEntity;
+import com.example.hospitalapp.repository.PatientRepository;
 import com.example.hospitalapp.util.Services;
 import com.example.hospitalapp.service.DataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -10,11 +12,14 @@ import java.util.*;
 @RestController
 @RequestMapping("/api")
 public class BaseController {
-    private final Map<String, DataService> services;
+    @Autowired
+    private Map<String, DataService> services;
+
+    @Autowired
+    private PatientRepository testRepository;
 
     public BaseController() throws InstantiationException, IllegalAccessException
     {
-        services = Services.getServices();
     }
 
     @PostMapping("/{serviceType}")

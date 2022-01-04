@@ -4,6 +4,9 @@ import com.example.hospitalapp.model.DataEntity;
 import com.example.hospitalapp.model.Patient;
 import com.example.hospitalapp.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.bind.Name;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

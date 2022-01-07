@@ -1,45 +1,60 @@
 package com.example.hospitalapp.model;
 
-import com.example.hospitalapp.repository.DoctorRepository;
-import com.example.hospitalapp.service.DataService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
-
-@Component
+@Component("doctor")
 public class Doctor implements DataEntity
 {
-    @Autowired
-    private DoctorRepository repository;
+    @Id
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String specialty;
 
-    private @Id String id;
-    private String name;
-
-    public Doctor(String name)
+    public Doctor(String firstName, String lastName, String specialty)
     {
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.specialty = specialty;
     }
 
     public Doctor() {
 
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
     public String getId()
     {
         return id;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public String getSpecialty()
+    {
+        return specialty;
+    }
+
+    public void setSpecialty(String specialty)
+    {
+        this.specialty = specialty;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.hospitalapp.util;
 
+import com.example.hospitalapp.model.DataEntity;
 import com.example.hospitalapp.service.DataService;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;

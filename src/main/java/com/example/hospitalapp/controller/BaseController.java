@@ -6,12 +6,14 @@ import com.example.hospitalapp.util.Services;
 import com.example.hospitalapp.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.context.ApplicationContext;
 
 import java.util.*;
 
 @RestController
 @RequestMapping("/api")
 public class BaseController {
+
     @Autowired
     private Map<String, DataService> services;
 

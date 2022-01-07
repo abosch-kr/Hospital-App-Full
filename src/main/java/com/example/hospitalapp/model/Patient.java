@@ -1,20 +1,14 @@
 package com.example.hospitalapp.model;
 
-import com.example.hospitalapp.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
-@Component
+
+@Component("patient")
 public class Patient implements DataEntity
 {
-    @Autowired
-    private PatientRepository repository;
-
     @Id private String id;
     private String firstName;
     private String middleName;

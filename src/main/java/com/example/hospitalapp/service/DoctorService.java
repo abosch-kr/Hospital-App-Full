@@ -27,7 +27,9 @@ public class DoctorService implements DataService
     {
         Doctor doctor = repository.findById(id).orElse(null);
         assert doctor != null;
-        doctor.setName(((Doctor)updatedDoctor).getName());
+        doctor.setFirstName(((Doctor)updatedDoctor).getFirstName());
+        doctor.setLastName(((Doctor)updatedDoctor).getLastName());
+        doctor.setSpecialty(((Doctor)updatedDoctor).getSpecialty());
 
         return repository.save(doctor);
     }

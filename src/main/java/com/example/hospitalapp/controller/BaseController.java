@@ -1,44 +1,47 @@
 package com.example.hospitalapp.controller;
 
 import com.example.hospitalapp.model.DataEntity;
-import com.example.hospitalapp.repository.PatientRepository;
-import com.example.hospitalapp.util.Services;
+import com.example.hospitalapp.model.Doctor;
+import com.example.hospitalapp.model.Patient;
 import com.example.hospitalapp.service.DataService;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.context.ApplicationContext;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/")
 public class BaseController {
 
     @Autowired
-    private Map<String, DataService> services;
+    private Map<String, DataEntity> models;
 
-    @PostMapping("/{serviceType}")
-    public DataEntity post(@RequestBody DataEntity entity, @PathVariable String serviceType) {
-        return services.get(serviceType).create(entity);
+    @PostMapping("{entityType}")
+    public DataEntity post(@RequestBody DataEntity entity, @PathVariable String entityType) {
+        return models.get(entityType).create(entity);
     }
 
-    @GetMapping("/{serviceType}")
-    public List<? extends DataEntity> get(@PathVariable String serviceType) {
-        return services.get(serviceType).readAll();
+    @GetMapping("{entityType}")
+    public List<? extends DataEntity> get(@PathVariable String entityType) {
+        return models.get(entityType).readAll();
     }
 
-    @GetMapping("/{serviceType}/{id}")
-    public Optional<? extends DataEntity> get(@PathVariable String serviceType, @PathVariable String id) {
-        return services.get(serviceType).read(id);
+    @GetMapping("{entityType}/{id}")
+    public Optional<? extends DataEntity> get(@PathVariable String entityType, @PathVariable String id) {
+        return models.get(entityType).read(id);
     }
 
-    @PutMapping("/{serviceType}/{id}")
-    public DataEntity update(@PathVariable String serviceType, @PathVariable String id, @RequestBody DataEntity entity) {
-        return services.get(serviceType).update(id, entity);
+    @PutMapping("{entityType}/{id}")
+    public DataEntity update(@PathVariable String entityType, @PathVariable String id, @RequestBody DataEntity entity) {
+        return models.get(entityType).update(id, entity);
     }
 
-    @DeleteMapping("/{serviceType}/{id}")
-    public String delete(@PathVariable String serviceType, @PathVariable String id) {
-        return services.get(serviceType).delete(id);
+    @DeleteMapping("{entityType}/{id}")
+    public String delete(@PathVariable String entityType, @PathVariable String id) {
+        return models.get(entityType).delete(id);
     }
 }

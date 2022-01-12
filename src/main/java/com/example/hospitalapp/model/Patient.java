@@ -1,7 +1,7 @@
 package com.example.hospitalapp.model;
 
 import com.example.hospitalapp.repository.PatientRepository;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,7 @@ import java.util.Optional;
 
 
 @Component("patient")
+@JsonTypeName("patient")
 public class Patient implements DataEntity
 {
     @Id private String id;

@@ -1,73 +1,58 @@
 package com.example.hospitalapp.controller;
 
-import com.example.hospitalapp.model.Doctor;
 import com.example.hospitalapp.model.Patient;
-import com.example.hospitalapp.repository.PatientRepository;
+import com.example.hospitalapp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/patients")
 public class PatientController
 {
     @Autowired
-    private PatientRepository repository;
+    private PatientService patientService;
 
     @GetMapping("/")
     public List<Patient> getPatients() {
-        return repository.findAll();
+        return patientService.getPatients();
     }
 
     @GetMapping("/{id}")
-    public Patient getPatient(@PathVariable String id) {
-        return repository.findById(id).orElse(null);
+    public Optional<Patient> getPatient(@PathVariable String id) {
+        return patientService.getPatient(id);
     }
 
     @PostMapping("/")
     public Patient postPatient(@RequestBody Patient patient) {
-        return repository.save(patient);
+        return patientService.createPatient(patient);
     }
 
     @PutMapping("/{id}")
     public Patient updatePatient(@PathVariable String id, @RequestBody Patient updatedPatient) {
-        Patient patient = repository.findById(id).orElse(null);
-        assert patient != null;
-        patient.setDoctor(updatedPatient.getDoctor());
-        patient.setAilments(updatedPatient.getAilments());
-        patient.setFirstName(updatedPatient.getFirstName());
-        patient.setLastName(updatedPatient.getLastName());
-        patient.setSuffix(updatedPatient.getSuffix());
-        patient.setMiddleName(updatedPatient.getMiddleName());
-        patient.setPriority(updatedPatient.getPriority());
-
-        return repository.save(patient);
+        return patientService.updatePatient(id, updatedPatient);
     }
 
     @DeleteMapping("/{id}")
     public String deletePatient(@PathVariable String id) {
-        repository.deleteById(id);
-        return id;
+        return patientService.deletePatient(id);
     }
 
     @DeleteMapping("/")
     public void deletePatients() {
-        repository.deleteAll();
+        patientService.deletePatients();
     }
 
     @PutMapping("/treat/{id}")
     public Patient treatPatient(@PathVariable String id) {
-        Patient patient = repository.findById(id).orElse(null);
-        assert patient != null;
-        patient.setTreated(true);
-        repository.save(patient);
-        return patient;
+        return patientService.treatPatient(id);
     }
 
     @GetMapping("/doctor/{doctorId}")
     public Patient getPatientsByDoctor(@PathVariable String doctorId) {
-        return repository.findPatientByDoctorId(doctorId);
+        return patientService.getPatientByDoctor(doctorId);
     }
 
 //    @PutMapping("/{id}/doctor/assign/{doctorId}")

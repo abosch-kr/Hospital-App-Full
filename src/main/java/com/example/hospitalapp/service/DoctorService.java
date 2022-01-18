@@ -3,23 +3,24 @@ package com.example.hospitalapp.service;
 import com.example.hospitalapp.model.DataEntity;
 import com.example.hospitalapp.model.Doctor;
 import com.example.hospitalapp.repository.DoctorRepository;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class DoctorService implements DataService
+public class DoctorService extends DataService<Doctor, DoctorRepository>
 {
+    private final DoctorRepository repository;
+
     @Autowired
-    private DoctorRepository repository;
+    DoctorService(DoctorRepository repository) {
+        super(repository);
+        this.repository = repository;
+    }
 
     @Override
-    public Doctor create(DataEntity doctor)
-    {
-        return repository.save((Doctor) doctor);
+    public DataEntity create(DataEntity entity) {
+        return repository.save((Doctor) entity);
     }
 
     @Override
@@ -32,24 +33,5 @@ public class DoctorService implements DataService
         doctor.setSpecialty(((Doctor)updatedDoctor).getSpecialty());
 
         return repository.save(doctor);
-    }
-
-    @Override
-    public List<Doctor> readAll()
-    {
-        return repository.findAll();
-    }
-
-    @Override
-    public Optional<Doctor> read(String id)
-    {
-        return repository.findById(id);
-    }
-
-    @Override
-    public String delete(String id)
-    {
-        repository.deleteById(id);
-        return id;
     }
 }

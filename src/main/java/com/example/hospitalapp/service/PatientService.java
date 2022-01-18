@@ -3,26 +3,26 @@ package com.example.hospitalapp.service;
 import com.example.hospitalapp.model.DataEntity;
 import com.example.hospitalapp.model.Patient;
 import com.example.hospitalapp.repository.PatientRepository;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.bind.Name;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class PatientService implements DataService
+public class PatientService extends DataService<Patient, PatientRepository>
 {
+    private final PatientRepository repository;
+
     @Autowired
-    private PatientRepository repository;
+    PatientService(PatientRepository repository) {
+        super(repository);
+        this.repository = repository;
+    }
 
     @Override
-    public Patient create(DataEntity patient)
-    {
-        return repository.save((Patient) patient);
+    public DataEntity create(DataEntity entity) {
+        return repository.save((Patient) entity);
     }
+
 
     @Override
     public Patient update(String id, DataEntity updatedPatient)
@@ -38,24 +38,5 @@ public class PatientService implements DataService
         patient.setPriority(((Patient)updatedPatient).getPriority());
 
         return repository.save(patient);
-    }
-
-    @Override
-    public List<Patient> readAll()
-    {
-        return repository.findAll();
-    }
-
-    @Override
-    public Optional<Patient> read(String id)
-    {
-        return repository.findById(id);
-    }
-
-    @Override
-    public String delete(String id)
-    {
-        repository.deleteById(id);
-        return id;
     }
 }

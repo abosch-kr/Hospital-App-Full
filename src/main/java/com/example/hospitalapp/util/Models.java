@@ -1,6 +1,7 @@
 package com.example.hospitalapp.util;
 
 import com.example.hospitalapp.model.DataEntity;
+import com.example.hospitalapp.service.DataService;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
@@ -23,9 +24,9 @@ public class Models
     private ObjectMapper objectMapper;
 
     @Bean
-    public Map<String, DataEntity> getServices()
+    public Map<String, DataService> getServices()
     {
-        return applicationContext.getBeansOfType(DataEntity.class);
+        return applicationContext.getBeansOfType(DataService.class);
     }
 
     @PostConstruct

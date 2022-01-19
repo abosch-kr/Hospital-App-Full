@@ -1,6 +1,7 @@
 package com.example.hospitalapp.service;
 
 import com.example.hospitalapp.model.DataEntity;
+import com.example.hospitalapp.model.Doctor;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-public abstract class DataService<T, S extends MongoRepository<? extends DataEntity, String>>
+public abstract class DataService<T extends DataEntity, S extends MongoRepository<T, String>>
 {
     private final S repository;
 
@@ -16,16 +17,18 @@ public abstract class DataService<T, S extends MongoRepository<? extends DataEnt
         this.repository = repository;
     }
 
-    public abstract DataEntity create(DataEntity entity);
+    public DataEntity create(T entity) {
+        return repository.save(entity);
+    }
 
     public abstract DataEntity update(String id, DataEntity entity);
 
     public List<T> readAll() {
-        return (List<T>) repository.findAll();
+        return repository.findAll();
     }
 
     public Optional<T> read(String id) {
-        return (Optional<T>) repository.findById(id);
+        return repository.findById(id);
     }
 
     public String delete(String id) {

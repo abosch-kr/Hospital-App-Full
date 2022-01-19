@@ -19,11 +19,6 @@ public class DoctorService extends DataService<Doctor, DoctorRepository>
     }
 
     @Override
-    public DataEntity create(DataEntity entity) {
-        return repository.save((Doctor) entity);
-    }
-
-    @Override
     public Doctor update(String id, DataEntity updatedDoctor)
     {
         Doctor doctor = repository.findById(id).orElse(null);

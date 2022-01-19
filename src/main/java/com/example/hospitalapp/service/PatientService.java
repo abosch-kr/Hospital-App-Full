@@ -18,11 +18,6 @@ public class PatientService extends DataService<Patient, PatientRepository>
         this.repository = repository;
     }
 
-    @Override
-    public DataEntity create(DataEntity entity) {
-        return repository.save((Patient) entity);
-    }
-
 
     @Override
     public Patient update(String id, DataEntity updatedPatient)

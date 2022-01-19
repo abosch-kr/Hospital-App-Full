@@ -17,11 +17,9 @@ public abstract class DataService<T extends DataEntity, S extends MongoRepositor
         this.repository = repository;
     }
 
-    public DataEntity create(T entity) {
+    public DataEntity save(T entity) {
         return repository.save(entity);
     }
-
-    public abstract DataEntity update(String id, DataEntity entity);
 
     public List<T> readAll() {
         return repository.findAll();

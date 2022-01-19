@@ -16,7 +16,7 @@ public class BaseController {
 
     @PostMapping("{entityType}")
     public DataEntity post(@RequestBody DataEntity entity, @PathVariable String entityType) {
-        return services.get(entityType).create(entity);
+        return services.get(entityType).save(entity);
     }
 
     @GetMapping("{entityType}")
@@ -32,7 +32,7 @@ public class BaseController {
     @PutMapping("{entityType}/{id}")
     public DataEntity update(@PathVariable String entityType, @PathVariable String id, @RequestBody DataEntity entity) {
         entity.setId(id);
-        return services.get(entityType).update(entity);
+        return services.get(entityType).save(entity);
     }
 
     @DeleteMapping("{entityType}/{id}")

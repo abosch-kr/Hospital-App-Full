@@ -31,7 +31,8 @@ public class BaseController {
 
     @PutMapping("{entityType}/{id}")
     public DataEntity update(@PathVariable String entityType, @PathVariable String id, @RequestBody DataEntity entity) {
-        return services.get(entityType).update(id, entity);
+        entity.setId(id);
+        return services.get(entityType).update(entity);
     }
 
     @DeleteMapping("{entityType}/{id}")

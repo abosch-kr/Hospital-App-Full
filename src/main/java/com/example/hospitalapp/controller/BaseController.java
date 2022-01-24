@@ -39,4 +39,9 @@ public class BaseController {
     public String delete(@PathVariable String entityType, @PathVariable String id) {
         return services.get(entityType).delete(id);
     }
+
+    @DeleteMapping("{entityType}")
+    public String deleteAll(@PathVariable String entityType) {
+        return services.get(entityType).deleteAll();
+    }
 }

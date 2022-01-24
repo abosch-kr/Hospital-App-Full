@@ -33,4 +33,13 @@ public abstract class DataService<T extends DataEntity, S extends MongoRepositor
         repository.deleteById(id);
         return id;
     }
+
+    public String deleteAll() {
+        try {
+            repository.deleteAll();
+        } catch (Exception exception) {
+            return exception.getMessage();
+        }
+        return "Deleted all entities";
+    }
 }

@@ -31,11 +31,16 @@ public class Models
 
     @PostConstruct
     public void populateJsonSubtypes() {
-        Reflections reflections = new Reflections("com.example.hospitalapp.model");
-        Set<Class<? extends DataEntity>> classes = reflections.getSubTypesOf(DataEntity.class);
-        for (Class type : classes) {
-            String name = ((JsonTypeName) type.getAnnotation(JsonTypeName.class)).value();
-            objectMapper.registerSubtypes(new NamedType(type, name));
+//        Reflections reflections = new Reflections("com.example.hospitalapp.model");
+//        Set<Class<? extends DataEntity>> classes = reflections.getSubTypesOf(DataEntity.class);
+//        for (Class type : classes) {
+//            String name = ((JsonTypeName) type.getAnnotation(JsonTypeName.class)).value();
+//            objectMapper.registerSubtypes(new NamedType(type, name));
+//        }
+        for(DataService d : getServices().values()){
+            Class c = d.getClass();
+            String name = ((JsonTypeName) c.getAnnotation(JsonTypeName.class)).value();
+            objectMapper.registerSubtypes(new NamedType(c, name));
         }
     }
 }

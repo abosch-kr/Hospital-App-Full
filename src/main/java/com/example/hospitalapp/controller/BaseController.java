@@ -12,11 +12,16 @@ import java.util.*;
 public class BaseController {
 
     @Autowired
-    private Map<String, DataService> services;
+        private Map<String, DataService> services;
 
     @PostMapping("{entityType}")
     public DataEntity post(@RequestBody DataEntity entity, @PathVariable String entityType) {
         return services.get(entityType).save(entity);
+    }
+
+    @GetMapping("/entities")
+    public Map<String, DataService> get() {
+        return services;
     }
 
     @GetMapping("{entityType}")

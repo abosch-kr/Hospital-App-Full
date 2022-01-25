@@ -3,19 +3,19 @@ package com.example.hospitalapp.service;
 import com.example.hospitalapp.model.DataEntity;
 import com.example.hospitalapp.model.Doctor;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-public abstract class DataService<T extends DataEntity, S extends MongoRepository<T, String>>
+public abstract class DataService<T extends DataEntity>
 {
-    private final S repository;
+    @Autowired
+    private MongoRepository<T, String> repository;
 
-    DataService(S repository) {
-        this.repository = repository;
-    }
+    public DataService() { }
 
     public DataEntity save(T entity) {
         return repository.save(entity);

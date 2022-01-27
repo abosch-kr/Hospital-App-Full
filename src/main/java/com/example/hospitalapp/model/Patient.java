@@ -1,5 +1,6 @@
 package com.example.hospitalapp.model;
 
+import com.example.hospitalapp.service.DataService;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
@@ -8,8 +9,8 @@ import java.util.List;
 
 
 @Component("patient")
-@JsonTypeName("patient")
-public class Patient implements DataEntity
+@JsonTypeName(value = "patient")
+public class Patient extends DataService<Patient> implements DataEntity
 {
     @Id private String id;
     private String firstName;

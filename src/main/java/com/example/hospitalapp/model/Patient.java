@@ -14,23 +14,26 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @ToString
-@Table(name = "tbl_patient")
+@Table(name = "PATIENT")
 public class Patient
 {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String firstName;
     private String middleName;
     private String lastName;
     private String suffix;
-    @ElementCollection
-    private List<String> ailments;
-    @OneToOne
-    @JoinColumn(
-            name = "doctor_id",
-            referencedColumnName = "doctorId"
-    )
-    private Doctor doctor;
     private boolean treated;
 
+    @ElementCollection
+    private List<String> ailments;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+    private Doctor doctor;
+
+    public void assignDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
 }

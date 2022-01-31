@@ -32,7 +32,12 @@ public class DoctorController {
     }
 
     @PutMapping("/{id}")
-    public Doctor put(@RequestBody Doctor entity, @PathVariable Long id) {
+    public Doctor update(@RequestBody Doctor entity, @PathVariable Long id) {
         return doctorService.update(entity, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        doctorService.delete(id);
     }
 }

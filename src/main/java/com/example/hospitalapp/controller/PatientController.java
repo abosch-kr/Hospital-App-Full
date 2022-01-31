@@ -16,9 +16,6 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @Autowired
-    private DoctorRepository doctorRepository;
-
     @PostMapping("/")
     public Patient post(@RequestBody Patient entity) {
         return patientService.create(entity);
@@ -37,6 +34,11 @@ public class PatientController {
     @PutMapping("/{id}")
     public Patient update(@RequestBody Patient entity, @PathVariable Long id) {
         return patientService.update(entity, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        patientService.delete(id);
     }
 
     @PutMapping("/{patientId}/doctor/{doctorId}")

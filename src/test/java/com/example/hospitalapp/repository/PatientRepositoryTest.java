@@ -23,16 +23,16 @@ class PatientRepositoryTest {
                 .specialty("dentist")
                 .build();
 
-        Patient patient = Patient.builder()
-                .firstName("anthony")
-                .middleName("jose")
-                .lastName("bosch")
-                .suffix("jr")
-                .ailments(List.of("headache", "stomachache", "rash"))
-                .treated(false)
-                .doctor(doctor)
-                .build();
+//        Patient patient = Patient.builder()
+//                .firstName("anthony")
+//                .middleName("jose")
+//                .lastName("bosch")
+//                .suffix("jr")
+//                .ailments(List.of("headache", "stomachache", "rash"))
+//                .treated(false)
+//                .doctor(doctor)
+//                .build();
 
-        repository.save(patient);
+//        repository.save(patient);
     }
 }
